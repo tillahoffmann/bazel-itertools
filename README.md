@@ -1,4 +1,4 @@
-# bazel-itertools
+# bazel-itertools [![CI pipeline](https://github.com/tillahoffmann/bazel-itertools/actions/workflows/main.yml/badge.svg)](https://github.com/tillahoffmann/bazel-itertools/actions/workflows/main.yml)
 
 Functions for efficient looping matching python's [`itertools`](https://docs.python.org/3/library/itertools.html).
 

@@ -30,8 +30,18 @@ print(itertools.combinations([1, 2, 3], 2))
 ### Terminating on the shortest input sequence
 
 - [ ] [`accumulate(iterable[, func, *, initial=None])`](https://docs.python.org/3/library/itertools.html#itertools.accumulate): Make an iterator that returns accumulated sums, or accumulated results of other binary functions (specified via the optional `func` argument).
+- [ ] [`chain(*iterables)`](https://docs.python.org/3/library/itertools.html#itertools.chain): Make an iterator that returns elements from the first iterable until it is exhausted, then proceeds to the next iterable, until all of the iterables are exhausted.
+- [ ] [`chain.from_iterable(iterable)`](https://docs.python.org/3/library/itertools.html#itertools.chain.from_iterable): Alternate constructor for `chain()`. Gets chained inputs from a single iterable argument that is evaluated lazily.
+- [ ] [`compress(data, selectors)`](https://docs.python.org/3/library/itertools.html#itertools.compress): Make an iterator that filters elements from `data` returning only those that have a corresponding element in `selectors` that evaluates to `True`. Stops when either the `data` or `selectors` iterables has been exhausted.
+- [ ] [`dropwhile(predicate, iterable)`](https://docs.python.org/3/library/itertools.html#itertools.dropwhile): Make an iterator that drops elements from the iterable as long as the predicate is true; afterwards, returns every element.
+- [ ] [`filterfalse(predicate, iterable)`](https://docs.python.org/3/library/itertools.html#itertools.filterfalse): Make an iterator that filters elements from `iterable` returning only those for which the `predicate` is `False`. If `predicate` is `None`, return the items that are false.
+- [ ] [`groupby(iterable, key=None)`](https://docs.python.org/3/library/itertools.html#itertools.groupby): Make an iterator that returns consecutive keys and groups from the `iterable`. The `key` is a function computing a key value for each element. If not specified or is `None`, `key` defaults to an identity function and returns the element unchanged.
+- [ ] [`islice(iterable, stop)` and `islice(iterable, start, stop[, step])`](https://docs.python.org/3/library/itertools.html#itertools.islice): Make an iterator that returns selected elements from the `iterable`. _This function is not implemented because starlark does not support the concept of iterators, only finite sequences. Standard slicing can always be used._
 - [x] [`pairwise(iterable)`](https://docs.python.org/3/library/itertools.html#itertools.pairwise): Return successive overlapping pairs taken from the input iterable.
-
+- [ ] [`starmap(function, iterable)`](https://docs.python.org/3/library/itertools.html#itertools.starmap): Make an iterator that computes the function using arguments obtained from the iterable.
+- [ ] [`takewhile(predicate, iterable)`](https://docs.python.org/3/library/itertools.html#itertools.takewhile): Make an iterator that returns elements from the `iterable` as long as the `predicate` is `True`.
+- [ ] [`tee(iterable, n=2)`](https://docs.python.org/3/library/itertools.html#itertools.tee): Return `n` independent iterators from a single `iterable`. _This function is not implemented because starlark does not support the concept of iterators, only finite sequences. Sequences can always be reused without exhausting them._
+- [ ] [`zip_longest(*iterables, fillvalue=None)`](https://docs.python.org/3/library/itertools.html#itertools.zip_longest): Make an iterator that aggregates elements from each of the `iterables`. If the `iterables` are of uneven length, missing values are filled-in with `fillvalue`. Iteration continues until the longest iterable is exhausted.
 
 ### Combinatoric functions
 
@@ -42,7 +52,7 @@ print(itertools.combinations([1, 2, 3], 2))
 
 ### Infinite iterators
 
-Infinite iterators are not supported because Starlark programs are [guaranteed to halt](https://github.com/bazelbuild/starlark/blob/master/spec.md#for-loops). Consequently, the following functions are not implemented.
+Infinite iterators are not supported because starlark does not support the concept of iterators, only finite sequences. Consequently, the following functions are not implemented.
 
 - [ ] [`count(start=0, step=1)`](https://docs.python.org/3/library/itertools.html#itertools.count): Make an iterator that returns evenly spaced values starting with number start.
 - [ ] [`cycle(iterable)`](https://docs.python.org/3/library/itertools.html#itertools.cycle): Make an iterator returning elements from the iterable and saving a copy of each. When the iterable is exhausted, return elements from the saved copy. Repeats indefinitely.

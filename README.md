@@ -2,6 +2,29 @@
 
 Functions for efficient looping matching python's [`itertools`](https://docs.python.org/3/library/itertools.html).
 
+## Usage
+
+First, add the following lines to your `WORKSPACE` file to download the `bazel-itertools` functions.
+
+```python
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "bazel_itertools",
+    url = "https://github.com/tillahoffmann/bazel-itertools/archive/refs/tags/[VERSION].tar.gz",
+    strip_prefix = "bazel-itertools-[VERSION]",
+    # sha256 = "[add for peace of mind]",
+)
+```
+
+Second, load the functions and use them, e.g. in a `BUILD` file.
+
+```python
+load("@bazel_itertools//lib:itertools.bzl", "itertools")
+
+print(itertools.combinations([1, 2, 3], 2))
+# [(1, 2), (1, 3), (2, 3)]
+```
+
 ## Functions
 
 ### Infinite iterators

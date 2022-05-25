@@ -74,14 +74,14 @@ def _compress_test_impl(ctx):
     return unittest.end(env)
 
 
-def _dropwhile_predicate(x):
+def _lt5_predicate(x):
         return x < 5
 
 
 def _dropwhile_test_impl(ctx):
     env = unittest.begin(ctx)
     asserts.equals(env, expected=[6, 4, 1],
-                   actual=it.dropwhile(_dropwhile_predicate, [1, 4, 6, 4, 1]))
+                   actual=it.dropwhile(_lt5_predicate, [1, 4, 6, 4, 1]))
     return unittest.end(env)
 
 
@@ -134,6 +134,12 @@ def _starmap_test_impl(ctx):
     return unittest.end(env)
 
 
+def _takewhile_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, actual=it.takewhile(_lt5_predicate, [1, 4, 6, 4, 1]), expected=[1, 4])
+    return unittest.end(env)
+
+
 _is_sorted_test = unittest.make(_is_sorted_test_impl)
 _unique_test = unittest.make(_unique_test_impl)
 accumulate_test = unittest.make(_accumulate_test_impl)
@@ -148,6 +154,7 @@ pairwise_test = unittest.make(_pairwise_test_impl)
 permutations_test = unittest.make(_permutations_test_impl)
 product_test = unittest.make(_product_test_impl)
 starmap_test = unittest.make(_starmap_test_impl)
+takewhile_test = unittest.make(_takewhile_test_impl)
 
 
 def itertools_test_suite(name):
@@ -167,4 +174,5 @@ def itertools_test_suite(name):
         permutations_test,
         product_test,
         starmap_test,
+        takewhile_test,
     )

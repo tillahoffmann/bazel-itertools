@@ -118,6 +118,16 @@ def _starmap(function, iterable):
     return [function(*args) for args in iterable]
 
 
+def _takewhile(predicate, iterable):
+    result = []
+    for x in iterable:
+        if predicate(x):
+            result.append(x)
+        else:
+            break
+    return result
+
+
 itertools = struct(
     _is_sorted=_is_sorted,
     _unique=_unique,
@@ -134,4 +144,5 @@ itertools = struct(
     permutations=_permutations,
     product=_product,
     starmap=_starmap,
+    takewhile=_takewhile,
 )

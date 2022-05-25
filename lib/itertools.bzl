@@ -30,16 +30,6 @@ def _pairwise(iterable):
 
 
 def _product(*args, repeat=1):
-    """
-    Cartesian product of input iterables.
-
-    Args:
-        *args: Input iterables to form a Cartesian product.
-        repeat: Number of times to repeat input iterables.
-
-    Returns:
-        product: Cartesian product of input iterables.
-    """
     pools = [tuple(pool) for pool in args] * repeat
     result = [[]]
     for pool in pools:

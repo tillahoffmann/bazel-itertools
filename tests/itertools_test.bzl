@@ -12,30 +12,27 @@ def _unique_test_impl(ctx):
 def _is_sorted_test_impl(ctx):
     env = unittest.begin(ctx)
     # Allow for repeated values.
-    asserts.equals(env, True, it._is_sorted([1, 2, 3], False))
-    asserts.equals(env, True, it._is_sorted([1, 2, 2, 3], False))
-    asserts.equals(env, False, it._is_sorted([1, 3, 2], False))
+    asserts.true(env, it._is_sorted([1, 2, 3], False))
+    asserts.true(env, it._is_sorted([1, 2, 2, 3], False))
+    asserts.false(env, it._is_sorted([1, 3, 2], False))
 
     # Strict sorting.
-    asserts.equals(env, True, it._is_sorted([1, 2, 3], True))
-    asserts.equals(env, False, it._is_sorted([1, 2, 2, 3], True))
-    asserts.equals(env, False, it._is_sorted([1, 3, 2], True))
+    asserts.true(env, it._is_sorted([1, 2, 3], True))
+    asserts.false(env, it._is_sorted([1, 2, 2, 3], True))
+    asserts.false(env, it._is_sorted([1, 3, 2], True))
     return unittest.end(env)
 
 
 def _combinations_test_impl(ctx):
     env = unittest.begin(ctx)
-    actual = it.combinations([1, 2, 3], 2)
-    expected = [(1, 2), (1, 3), (2, 3)]
-    asserts.equals(env, expected, actual)
+    asserts.equals(env, expected=[(1, 2), (1, 3), (2, 3)], actual=it.combinations([1, 2, 3], 2))
     return unittest.end(env)
 
 
 def _combinations_with_replacement_test_impl(ctx):
     env = unittest.begin(ctx)
-    actual = it.combinations_with_replacement([1, 2, 3], 2)
-    expected = [(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)]
-    asserts.equals(env, expected, actual)
+    asserts.equals(env, expected=[(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)],
+                   actual=it.combinations_with_replacement([1, 2, 3], 2))
     return unittest.end(env)
 
 
@@ -45,35 +42,30 @@ def _dropwhile_predicate(x):
 
 def _dropwhile_test_impl(ctx):
     env = unittest.begin(ctx)
-    asserts.equals(env, [6, 4, 1], it.dropwhile(_dropwhile_predicate, [1, 4, 6, 4, 1]))
+    asserts.equals(env, expected=[6, 4, 1],
+                   actual=it.dropwhile(_dropwhile_predicate, [1, 4, 6, 4, 1]))
     return unittest.end(env)
 
 
 def _pairwise_test_impl(ctx):
     env = unittest.begin(ctx)
-    actual = it.pairwise([1, 2, 3])
-    expected = [(1, 2), (2, 3)]
-    asserts.equals(env, expected, actual)
+    asserts.equals(env, expected=[(1, 2), (2, 3)], actual=it.pairwise([1, 2, 3]))
     return unittest.end(env)
 
 
 def _permutations_test_impl(ctx):
     env = unittest.begin(ctx)
-    actual = it.permutations([1, 2, 3], 2)
-    expected = [(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]
-    asserts.equals(env, expected, actual)
+    asserts.equals(env, expected=[(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)],
+                   actual=it.permutations([1, 2, 3], 2))
     return unittest.end(env)
 
 
 def _product_test_impl(ctx):
     env = unittest.begin(ctx)
-    actual = it.product([1, 2], ["a", "b"])
-    expected = [(1, "a"), (1, "b"), (2, "a"), (2, "b")]
-
-    actual = it.product([1, 2], repeat=2)
-    expected = [(1, 1), (1, 2), (2, 1), (2, 2)]
-    asserts.equals(env, expected, actual)
-    asserts.equals(env, expected, actual)
+    asserts.equals(env, expected=[(1, "a"), (1, "b"), (2, "a"), (2, "b")],
+                   actual=it.product([1, 2], ["a", "b"]))
+    asserts.equals(env, expected=[(1, 1), (1, 2), (2, 1), (2, 2)],
+                   actual=it.product([1, 2], repeat=2))
     return unittest.end(env)
 
 

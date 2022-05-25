@@ -114,6 +114,10 @@ def _groupby(iterable, key=None):
     return result.items()
 
 
+def _starmap(function, iterable):
+    return [function(*args) for args in iterable]
+
+
 itertools = struct(
     _is_sorted=_is_sorted,
     _unique=_unique,
@@ -129,4 +133,5 @@ itertools = struct(
     pairwise=_pairwise,
     permutations=_permutations,
     product=_product,
+    starmap=_starmap,
 )

@@ -5,11 +5,11 @@ load("@bazel_skylib//lib:unittest.bzl", "asserts", "unittest")
 load("//lib:itertools.bzl", it="itertools")
 
 
-def _accumulate_mul(x, y):
+def _mul(x, y):
     return x * y
 
 
-def _accumulate_sub(x, y):
+def _sub(x, y):
     return x - y
 
 
@@ -19,10 +19,8 @@ def _accumulate_test_impl(ctx):
     asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5]), expected=[1, 3, 6, 10, 15])
     asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], initial=100),
                    expected=[100, 101, 103, 106, 110, 115])
-    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], _accumulate_mul),
-                   expected=[1, 2, 6, 24, 120])
-    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], _accumulate_sub),
-                   expected=[1, -1, -4, -8, -13])
+    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], _mul), expected=[1, 2, 6, 24, 120])
+    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], _sub), expected=[1, -1, -4, -8, -13])
     return unittest.end(env)
 
 
@@ -130,6 +128,12 @@ def _product_test_impl(ctx):
     return unittest.end(env)
 
 
+def _starmap_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, actual=it.starmap(_mul, [(2, 5), (3, 2), (10, 3)]), expected=[10, 6, 30])
+    return unittest.end(env)
+
+
 _is_sorted_test = unittest.make(_is_sorted_test_impl)
 _unique_test = unittest.make(_unique_test_impl)
 accumulate_test = unittest.make(_accumulate_test_impl)
@@ -143,6 +147,7 @@ groupby_test = unittest.make(_groupby_test_impl)
 pairwise_test = unittest.make(_pairwise_test_impl)
 permutations_test = unittest.make(_permutations_test_impl)
 product_test = unittest.make(_product_test_impl)
+starmap_test = unittest.make(_starmap_test_impl)
 
 
 def itertools_test_suite(name):
@@ -161,4 +166,5 @@ def itertools_test_suite(name):
         pairwise_test,
         permutations_test,
         product_test,
+        starmap_test,
     )

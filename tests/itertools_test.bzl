@@ -1,5 +1,5 @@
 load("@bazel_skylib//lib:unittest.bzl", "asserts", "unittest")
-load(":itertools.bzl", it="itertools")
+load("//lib:itertools.bzl", it="itertools")
 
 
 def _unique_test_impl(ctx):

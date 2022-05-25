@@ -14,4 +14,4 @@ jobs:
     steps:
       - uses: "actions/checkout@v2"
       - name: "Run Bazel tests"
-        run: "bazel test //:itertools_tests"
+        run: "bazel test //tests:itertools_tests"

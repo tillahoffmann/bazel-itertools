@@ -29,7 +29,7 @@ print(itertools.combinations([1, 2, 3], 2))
 
 ### Terminating on the shortest input sequence
 
-- [ ] [`accumulate(iterable[, func, *, initial=None])`](https://docs.python.org/3/library/itertools.html#itertools.accumulate): Make an iterator that returns accumulated sums, or accumulated results of other binary functions (specified via the optional `func` argument).
+- [x] [`accumulate(iterable, func, *, initial=None)`](https://docs.python.org/3/library/itertools.html#itertools.accumulate): Make an iterator that returns accumulated sums, or accumulated results of other binary functions (specified via the optional `func` argument).
 - [x] [`chain(*iterables)`](https://docs.python.org/3/library/itertools.html#itertools.chain): Make an iterator that returns elements from the first iterable until it is exhausted, then proceeds to the next iterable, until all of the iterables are exhausted.
 - [x] [`chain.from_iterable(iterable)`](https://docs.python.org/3/library/itertools.html#itertools.chain.from_iterable): Alternate constructor for `chain()`. Gets chained inputs from a single iterable argument that is evaluated lazily. _This function is implemented as `chain_from_iterable` because starlark does not support classes._
 - [ ] [`compress(data, selectors)`](https://docs.python.org/3/library/itertools.html#itertools.compress): Make an iterator that filters elements from `data` returning only those that have a corresponding element in `selectors` that evaluates to `True`. Stops when either the `data` or `selectors` iterables has been exhausted.

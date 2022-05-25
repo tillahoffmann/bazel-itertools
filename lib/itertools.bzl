@@ -4,6 +4,28 @@ See https://docs.python.org/3/library/itertools.html for details.
 """
 
 
+def _add(x, y):
+    return x + y
+
+
+def _accumulate(iterable, func=None, initial=None):
+    if func == None:
+        func = _add
+    total = None
+    result = []
+    for i, x in enumerate(iterable):
+        if i == 0:
+            if initial == None:
+                total = x
+            else:
+                result.append(initial)
+                total = func(initial, x)
+        else:
+            total = func(total, x)
+        result.append(total)
+    return result
+
+
 def _unique(values):
     unique_values = []
     for value in values:
@@ -78,6 +100,7 @@ def _dropwhile(predicate, iterable):
 itertools = struct(
     _is_sorted=_is_sorted,
     _unique=_unique,
+    accumulate=_accumulate,
     chain = _chain,
     chain_from_iterable=_chain_from_iterable,
     combinations=_combinations,

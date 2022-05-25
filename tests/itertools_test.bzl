@@ -2,6 +2,27 @@ load("@bazel_skylib//lib:unittest.bzl", "asserts", "unittest")
 load("//lib:itertools.bzl", it="itertools")
 
 
+def _accumulate_mul(x, y):
+    return x * y
+
+
+def _accumulate_sub(x, y):
+    return x - y
+
+
+def _accumulate_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, actual=it.accumulate([]), expected=[])
+    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5]), expected=[1, 3, 6, 10, 15])
+    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], initial=100),
+                   expected=[100, 101, 103, 106, 110, 115])
+    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], _accumulate_mul),
+                   expected=[1, 2, 6, 24, 120])
+    asserts.equals(env, actual=it.accumulate([1, 2, 3, 4, 5], _accumulate_sub),
+                   expected=[1, -1, -4, -8, -13])
+    return unittest.end(env)
+
+
 def _unique_test_impl(ctx):
     env = unittest.begin(ctx)
     asserts.equals(env, [1, 2, 3], it._unique([1, 2, 3]))
@@ -80,6 +101,7 @@ def _product_test_impl(ctx):
 
 _is_sorted_test = unittest.make(_is_sorted_test_impl)
 _unique_test = unittest.make(_unique_test_impl)
+accumulate_test = unittest.make(_accumulate_test_impl)
 chain_test = unittest.make(_chain_test_impl)
 combinations_test = unittest.make(_combinations_test_impl)
 combinations_with_replacement_test = unittest.make(_combinations_with_replacement_test_impl)
@@ -94,6 +116,7 @@ def itertools_test_suite(name):
         name,
         _is_sorted_test,
         _unique_test,
+        accumulate_test,
         chain_test,
         combinations_test,
         combinations_with_replacement_test,

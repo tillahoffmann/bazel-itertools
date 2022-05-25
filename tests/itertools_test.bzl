@@ -39,6 +39,16 @@ def _combinations_with_replacement_test_impl(ctx):
     return unittest.end(env)
 
 
+def _dropwhile_predicate(x):
+        return x < 5
+
+
+def _dropwhile_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, [6, 4, 1], it.dropwhile(_dropwhile_predicate, [1, 4, 6, 4, 1]))
+    return unittest.end(env)
+
+
 def _pairwise_test_impl(ctx):
     env = unittest.begin(ctx)
     actual = it.pairwise([1, 2, 3])
@@ -71,6 +81,7 @@ _is_sorted_test = unittest.make(_is_sorted_test_impl)
 _unique_test = unittest.make(_unique_test_impl)
 combinations_test = unittest.make(_combinations_test_impl)
 combinations_with_replacement_test = unittest.make(_combinations_with_replacement_test_impl)
+dropwhile_test = unittest.make(_dropwhile_test_impl)
 pairwise_test = unittest.make(_pairwise_test_impl)
 permutations_test = unittest.make(_permutations_test_impl)
 product_test = unittest.make(_product_test_impl)
@@ -83,6 +94,7 @@ def itertools_test_suite(name):
         _unique_test,
         combinations_test,
         combinations_with_replacement_test,
+        dropwhile_test,
         pairwise_test,
         permutations_test,
         product_test,

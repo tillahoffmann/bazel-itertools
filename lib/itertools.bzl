@@ -52,7 +52,7 @@ def _pairwise(iterable):
 
 
 def _product(*args, repeat=1):
-    pools = [tuple(pool) for pool in args] * repeat
+    pools = args * repeat
     result = [[]]
     for pool in pools:
         result = [x + [y] for x in result for y in pool]
@@ -60,10 +60,9 @@ def _product(*args, repeat=1):
 
 
 def _permutations(iterable, r=None):
-    pool = tuple(iterable)
-    n = len(pool)
+    n = len(iterable)
     r = n if r == None else r
-    return [values for values in _product(pool, repeat=r) if len(_unique(values)) == r]
+    return [values for values in _product(iterable, repeat=r) if len(_unique(values)) == r]
 
 
 def _chain(*iterables):
@@ -75,10 +74,9 @@ def _chain_from_iterable(iterables):
 
 
 def _combinations(iterable, r, with_replacement=False):
-    pool = tuple(iterable)
-    n = len(pool)
+    n = len(iterable)
     return [
-        tuple([pool[i] for i in indices]) for indices in _product(range(n), repeat=r) if
+        tuple([iterable[i] for i in indices]) for indices in _product(range(n), repeat=r) if
         _is_sorted(indices, not with_replacement)
     ]
 

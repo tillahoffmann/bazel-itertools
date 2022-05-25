@@ -128,6 +128,12 @@ def _takewhile(predicate, iterable):
     return result
 
 
+def _zip_longest(*iterables, fillvalue=None):
+    longest = max([len(iterable) for iterable in iterables])
+    return [tuple([iterable[i] if i < len(iterable) else fillvalue for iterable in iterables]) for
+            i in range(longest)]
+
+
 itertools = struct(
     _is_sorted=_is_sorted,
     _unique=_unique,
@@ -145,4 +151,5 @@ itertools = struct(
     product=_product,
     starmap=_starmap,
     takewhile=_takewhile,
+    zip_longest=_zip_longest,
 )

@@ -140,6 +140,15 @@ def _takewhile_test_impl(ctx):
     return unittest.end(env)
 
 
+def _zip_longest_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, actual=it.zip_longest(["A", "B", "C", "D"], ["x", "y"], fillvalue="-"),
+                   expected=[("A", "x"), ("B", "y"), ("C", "-"), ("D", "-")])
+    asserts.equals(env, actual=it.zip_longest([0, 1], [3, 4, 5]),
+                   expected=[(0, 3), (1, 4), (None, 5)])
+    return unittest.end(env)
+
+
 _is_sorted_test = unittest.make(_is_sorted_test_impl)
 _unique_test = unittest.make(_unique_test_impl)
 accumulate_test = unittest.make(_accumulate_test_impl)
@@ -155,6 +164,7 @@ permutations_test = unittest.make(_permutations_test_impl)
 product_test = unittest.make(_product_test_impl)
 starmap_test = unittest.make(_starmap_test_impl)
 takewhile_test = unittest.make(_takewhile_test_impl)
+zip_longest_test = unittest.make(_zip_longest_test_impl)
 
 
 def itertools_test_suite(name):
@@ -175,4 +185,5 @@ def itertools_test_suite(name):
         product_test,
         starmap_test,
         takewhile_test,
+        zip_longest_test,
     )

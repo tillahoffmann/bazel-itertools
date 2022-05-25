@@ -41,7 +41,7 @@ print(itertools.combinations([1, 2, 3], 2))
 - [x] [`starmap(function, iterable)`](https://docs.python.org/3/library/itertools.html#itertools.starmap): Make an iterator that computes the function using arguments obtained from the iterable.
 - [x] [`takewhile(predicate, iterable)`](https://docs.python.org/3/library/itertools.html#itertools.takewhile): Make an iterator that returns elements from the `iterable` as long as the `predicate` is `True`.
 - [ ] [`tee(iterable, n=2)`](https://docs.python.org/3/library/itertools.html#itertools.tee): Return `n` independent iterators from a single `iterable`. _This function is not implemented because starlark does not support the concept of iterators, only finite sequences. Sequences can always be reused without exhausting them._
-- [ ] [`zip_longest(*iterables, fillvalue=None)`](https://docs.python.org/3/library/itertools.html#itertools.zip_longest): Make an iterator that aggregates elements from each of the `iterables`. If the `iterables` are of uneven length, missing values are filled-in with `fillvalue`. Iteration continues until the longest iterable is exhausted.
+- [x] [`zip_longest(*iterables, fillvalue=None)`](https://docs.python.org/3/library/itertools.html#itertools.zip_longest): Make an iterator that aggregates elements from each of the `iterables`. If the `iterables` are of uneven length, missing values are filled-in with `fillvalue`. Iteration continues until the longest iterable is exhausted.
 
 ### Combinatoric functions
 

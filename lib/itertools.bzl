@@ -107,6 +107,13 @@ def _filterfalse(predicate, iterable):
     return [x for x in iterable if not predicate(x)]
 
 
+def _groupby(iterable, key=None):
+    result = {}
+    for x in iterable:
+        result.setdefault(x if key == None else key(x), []).append(x)
+    return result.items()
+
+
 itertools = struct(
     _is_sorted=_is_sorted,
     _unique=_unique,
@@ -118,6 +125,7 @@ itertools = struct(
     compress=_compress,
     dropwhile=_dropwhile,
     filterfalse=_filterfalse,
+    groupby=_groupby,
     pairwise=_pairwise,
     permutations=_permutations,
     product=_product,

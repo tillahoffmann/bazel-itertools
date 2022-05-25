@@ -87,16 +87,24 @@ def _dropwhile_test_impl(ctx):
     return unittest.end(env)
 
 
-def _filterfalse_true_if_odd(x):
-    return x % 2
+def _is_odd(x):
+    return bool(x % 2)
 
 
 def _filterfalse_test_impl(ctx):
     env = unittest.begin(ctx)
-    asserts.equals(env, actual=it.filterfalse(_filterfalse_true_if_odd, range(10)),
-                   expected=[0, 2, 4, 6, 8])
+    asserts.equals(env, actual=it.filterfalse(_is_odd, range(10)), expected=[0, 2, 4, 6, 8])
     asserts.equals(env, actual=it.filterfalse(None, [None, False, True, 0, 1, "", "A"]),
                    expected=[None, False, 0, ""])
+    return unittest.end(env)
+
+
+def _groupby_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, actual=it.groupby([0, 0, 0, 0, 1, 1, 1, 2, 2, 3]),
+                   expected=[(0, [0, 0, 0, 0]), (1, [1, 1, 1]), (2, [2, 2]), (3, [3])])
+    asserts.equals(env, actual=it.groupby(range(10), _is_odd),
+                   expected=[(False, [0, 2, 4, 6, 8]), (True, [1, 3, 5, 7, 9])])
     return unittest.end(env)
 
 
@@ -131,6 +139,7 @@ combinations_with_replacement_test = unittest.make(_combinations_with_replacemen
 compress_test = unittest.make(_compress_test_impl)
 dropwhile_test = unittest.make(_dropwhile_test_impl)
 filterfalse_test = unittest.make(_filterfalse_test_impl)
+groupby_test = unittest.make(_groupby_test_impl)
 pairwise_test = unittest.make(_pairwise_test_impl)
 permutations_test = unittest.make(_permutations_test_impl)
 product_test = unittest.make(_product_test_impl)
@@ -148,6 +157,7 @@ def itertools_test_suite(name):
         compress_test,
         dropwhile_test,
         filterfalse_test,
+        groupby_test,
         pairwise_test,
         permutations_test,
         product_test,

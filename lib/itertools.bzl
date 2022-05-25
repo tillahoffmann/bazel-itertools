@@ -44,6 +44,14 @@ def _permutations(iterable, r=None):
     return [values for values in _product(pool, repeat=r) if len(_unique(values)) == r]
 
 
+def _chain(*iterables):
+    return _chain_from_iterable(iterables)
+
+
+def _chain_from_iterable(iterables):
+    return [x for iterable in iterables for x in iterable]
+
+
 def _combinations(iterable, r, with_replacement=False):
     pool = tuple(iterable)
     n = len(pool)
@@ -70,6 +78,8 @@ def _dropwhile(predicate, iterable):
 itertools = struct(
     _is_sorted=_is_sorted,
     _unique=_unique,
+    chain = _chain,
+    chain_from_iterable=_chain_from_iterable,
     combinations=_combinations,
     combinations_with_replacement=_combinations_with_replacement,
     dropwhile=_dropwhile,

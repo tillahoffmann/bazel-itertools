@@ -23,6 +23,15 @@ def _is_sorted_test_impl(ctx):
     return unittest.end(env)
 
 
+def _chain_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, actual=it.chain(["A", "B", "C"], ["D", "E", "F"]),
+                   expected=["A", "B", "C", "D", "E", "F"])
+    asserts.equals(env, actual=it.chain_from_iterable([[1, 2, 3], ["D", "E", "F"]]),
+                   expected=[1, 2, 3, "D", "E", "F"])
+    return unittest.end(env)
+
+
 def _combinations_test_impl(ctx):
     env = unittest.begin(ctx)
     asserts.equals(env, expected=[(1, 2), (1, 3), (2, 3)], actual=it.combinations([1, 2, 3], 2))
@@ -71,6 +80,7 @@ def _product_test_impl(ctx):
 
 _is_sorted_test = unittest.make(_is_sorted_test_impl)
 _unique_test = unittest.make(_unique_test_impl)
+chain_test = unittest.make(_chain_test_impl)
 combinations_test = unittest.make(_combinations_test_impl)
 combinations_with_replacement_test = unittest.make(_combinations_with_replacement_test_impl)
 dropwhile_test = unittest.make(_dropwhile_test_impl)
@@ -84,6 +94,7 @@ def itertools_test_suite(name):
         name,
         _is_sorted_test,
         _unique_test,
+        chain_test,
         combinations_test,
         combinations_with_replacement_test,
         dropwhile_test,

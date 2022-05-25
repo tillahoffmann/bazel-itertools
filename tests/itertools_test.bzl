@@ -87,6 +87,19 @@ def _dropwhile_test_impl(ctx):
     return unittest.end(env)
 
 
+def _filterfalse_true_if_odd(x):
+    return x % 2
+
+
+def _filterfalse_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, actual=it.filterfalse(_filterfalse_true_if_odd, range(10)),
+                   expected=[0, 2, 4, 6, 8])
+    asserts.equals(env, actual=it.filterfalse(None, [None, False, True, 0, 1, "", "A"]),
+                   expected=[None, False, 0, ""])
+    return unittest.end(env)
+
+
 def _pairwise_test_impl(ctx):
     env = unittest.begin(ctx)
     asserts.equals(env, expected=[(1, 2), (2, 3)], actual=it.pairwise([1, 2, 3]))
@@ -117,6 +130,7 @@ combinations_test = unittest.make(_combinations_test_impl)
 combinations_with_replacement_test = unittest.make(_combinations_with_replacement_test_impl)
 compress_test = unittest.make(_compress_test_impl)
 dropwhile_test = unittest.make(_dropwhile_test_impl)
+filterfalse_test = unittest.make(_filterfalse_test_impl)
 pairwise_test = unittest.make(_pairwise_test_impl)
 permutations_test = unittest.make(_permutations_test_impl)
 product_test = unittest.make(_product_test_impl)
@@ -133,6 +147,7 @@ def itertools_test_suite(name):
         combinations_with_replacement_test,
         compress_test,
         dropwhile_test,
+        filterfalse_test,
         pairwise_test,
         permutations_test,
         product_test,

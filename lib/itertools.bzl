@@ -101,6 +101,12 @@ def _dropwhile(predicate, iterable):
     return result
 
 
+def _filterfalse(predicate, iterable):
+    if predicate == None:
+        predicate = bool
+    return [x for x in iterable if not predicate(x)]
+
+
 itertools = struct(
     _is_sorted=_is_sorted,
     _unique=_unique,
@@ -111,6 +117,7 @@ itertools = struct(
     combinations_with_replacement=_combinations_with_replacement,
     compress=_compress,
     dropwhile=_dropwhile,
+    filterfalse=_filterfalse,
     pairwise=_pairwise,
     permutations=_permutations,
     product=_product,

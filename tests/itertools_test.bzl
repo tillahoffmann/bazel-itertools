@@ -1,3 +1,6 @@
+"""
+Tests for the itertools package.
+"""
 load("@bazel_skylib//lib:unittest.bzl", "asserts", "unittest")
 load("//lib:itertools.bzl", it="itertools")
 
@@ -66,6 +69,13 @@ def _combinations_with_replacement_test_impl(ctx):
     return unittest.end(env)
 
 
+def _compress_test_impl(ctx):
+    env = unittest.begin(ctx)
+    asserts.equals(env, expected=["A", "C", "E", "F"],
+                   actual=it.compress(["A", "B", "C", "D", "E", "F"], [1, 0, 1, 0, 1, 1]))
+    return unittest.end(env)
+
+
 def _dropwhile_predicate(x):
         return x < 5
 
@@ -105,6 +115,7 @@ accumulate_test = unittest.make(_accumulate_test_impl)
 chain_test = unittest.make(_chain_test_impl)
 combinations_test = unittest.make(_combinations_test_impl)
 combinations_with_replacement_test = unittest.make(_combinations_with_replacement_test_impl)
+compress_test = unittest.make(_compress_test_impl)
 dropwhile_test = unittest.make(_dropwhile_test_impl)
 pairwise_test = unittest.make(_pairwise_test_impl)
 permutations_test = unittest.make(_permutations_test_impl)
@@ -120,6 +131,7 @@ def itertools_test_suite(name):
         chain_test,
         combinations_test,
         combinations_with_replacement_test,
+        compress_test,
         dropwhile_test,
         pairwise_test,
         permutations_test,

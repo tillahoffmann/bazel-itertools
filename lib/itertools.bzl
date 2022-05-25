@@ -87,6 +87,10 @@ def _combinations_with_replacement(iterable, r):
     return _combinations(iterable, r, with_replacement=True)
 
 
+def _compress(data, selectors):
+    return [d for d, s in zip(data, selectors) if s]
+
+
 def _dropwhile(predicate, iterable):
     result = []
     y = True
@@ -105,6 +109,7 @@ itertools = struct(
     chain_from_iterable=_chain_from_iterable,
     combinations=_combinations,
     combinations_with_replacement=_combinations_with_replacement,
+    compress=_compress,
     dropwhile=_dropwhile,
     pairwise=_pairwise,
     permutations=_permutations,
